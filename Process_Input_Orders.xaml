@@ -5,6 +5,23 @@
     <x:Property Name="UiPathEventObjectType" Type="InArgument(x:String)" />
     <x:Property Name="UiPathEventObjectId" Type="InArgument(x:String)" />
     <x:Property Name="UiPathAdditionalEventData" Type="InArgument(x:String)" />
+    <x:Property Name="baseFolder" Type="InArgument(x:String)" />
+    <x:Property Name="inputFolder" Type="InArgument(x:String)" />
+    <x:Property Name="masterDataFolder" Type="InArgument(x:String)" />
+    <x:Property Name="productMasterPath" Type="InArgument(x:String)" />
+    <x:Property Name="priceListPath" Type="InArgument(x:String)" />
+    <x:Property Name="inventoryPath" Type="InArgument(x:String)" />
+    <x:Property Name="dtOrder" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="dtProducts" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="dtPrices" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="dtInventory" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="productId" Type="InArgument(x:String)" />
+    <x:Property Name="productRows" Type="InArgument(sd:DataRow[])" />
+    <x:Property Name="priceRows" Type="InArgument(sd:DataRow[])" />
+    <x:Property Name="unitPrice" Type="InArgument(x:Double)" />
+    <x:Property Name="inventoryRows" Type="InArgument(sd:DataRow[])" />
+    <x:Property Name="quantity" Type="InArgument(x:Int32)" />
+    <x:Property Name="availableQty" Type="InArgument(x:Int32)" />
   </x:Members>
   <this:Main.UiPathEventConnector>
     <InArgument x:TypeArguments="x:String" />
@@ -21,6 +38,57 @@
   <this:Main.UiPathAdditionalEventData>
     <InArgument x:TypeArguments="x:String" />
   </this:Main.UiPathAdditionalEventData>
+  <this:Main.baseFolder>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Main.baseFolder>
+  <this:Main.inputFolder>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Main.inputFolder>
+  <this:Main.masterDataFolder>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Main.masterDataFolder>
+  <this:Main.productMasterPath>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Main.productMasterPath>
+  <this:Main.priceListPath>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Main.priceListPath>
+  <this:Main.inventoryPath>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Main.inventoryPath>
+  <this:Main.dtOrder>
+    <InArgument x:TypeArguments="sd:DataTable" />
+  </this:Main.dtOrder>
+  <this:Main.dtProducts>
+    <InArgument x:TypeArguments="sd:DataTable" />
+  </this:Main.dtProducts>
+  <this:Main.dtPrices>
+    <InArgument x:TypeArguments="sd:DataTable" />
+  </this:Main.dtPrices>
+  <this:Main.dtInventory>
+    <InArgument x:TypeArguments="sd:DataTable" />
+  </this:Main.dtInventory>
+  <this:Main.productId>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Main.productId>
+  <this:Main.productRows>
+    <InArgument x:TypeArguments="sd:DataRow[]" />
+  </this:Main.productRows>
+  <this:Main.priceRows>
+    <InArgument x:TypeArguments="sd:DataRow[]" />
+  </this:Main.priceRows>
+  <this:Main.unitPrice>
+    <InArgument x:TypeArguments="x:Double" />
+  </this:Main.unitPrice>
+  <this:Main.inventoryRows>
+    <InArgument x:TypeArguments="sd:DataRow[]" />
+  </this:Main.inventoryRows>
+  <this:Main.quantity>
+    <InArgument x:TypeArguments="x:Int32" />
+  </this:Main.quantity>
+  <this:Main.availableQty>
+    <InArgument x:TypeArguments="x:Int32" />
+  </this:Main.availableQty>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
@@ -136,6 +204,8 @@
       <x:String>UiPath.Shared.Activities</x:String>
       <x:String>UiPath.Excel.Activities</x:String>
       <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>Microsoft</x:String>
+      <x:String>Microsoft.CodeAnalysis</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -239,32 +309,29 @@
       <AssemblyReference>System.Linq.Async</AssemblyReference>
       <AssemblyReference>System.Collections</AssemblyReference>
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Validation</AssemblyReference>
+      <AssemblyReference>Microsoft.CodeAnalysis.Features</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="841,4065" sap2010:WorkflowViewState.IdRef="Sequence_40">
+  <Sequence sap:VirtualizedContainerService.HintSize="782,6267" sap2010:WorkflowViewState.IdRef="Sequence_69">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="priceListPath" />
-      <Variable x:TypeArguments="x:String" Name="inventoryPath" />
-      <Variable x:TypeArguments="sd:DataTable" Name="dtPrices" />
-      <Variable x:TypeArguments="sd:DataTable" Name="dtInventory" />
-      <Variable x:TypeArguments="x:String" Name="baseFolder" />
-      <Variable x:TypeArguments="x:String" Name="inputFolder" />
-      <Variable x:TypeArguments="sd:DataTable" Name="dtOrder" />
-      <Variable x:TypeArguments="x:String" Name="masterDataFolder" />
-      <Variable x:TypeArguments="x:String" Name="productMasterPath" />
-      <Variable x:TypeArguments="sd:DataTable" Name="dtProducts" />
       <Variable x:TypeArguments="x:String" Name="productCode" />
-      <Variable x:TypeArguments="sd:DataRow[]" Name="productRows" />
       <Variable x:TypeArguments="si:FileInfo" Name="CurrentFile" />
       <Variable x:TypeArguments="x:Int32" Name="CurrentIndex" />
+      <Variable x:TypeArguments="x:String" Name="UiPathEventConnector" />
+      <Variable x:TypeArguments="x:String" Name="UiPathEvent" />
+      <Variable x:TypeArguments="x:String" Name="UiPathEventObjectType" />
+      <Variable x:TypeArguments="x:String" Name="UiPathEventObjectId" />
+      <Variable x:TypeArguments="x:String" Name="UiPathAdditionalEventData" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ManualTrigger Result="{x:Null}" DisplayName="Start the process manually." sap:VirtualizedContainerService.HintSize="660,79" sap2010:WorkflowViewState.IdRef="ManualTrigger_7" />
-    <Assign DisplayName="Assign the base folder path." sap:VirtualizedContainerService.HintSize="660,175" sap2010:WorkflowViewState.IdRef="Assign_33">
+    <ui:ManualTrigger Result="{x:Null}" DisplayName="Manually trigger the process." sap:VirtualizedContainerService.HintSize="700,79" sap2010:WorkflowViewState.IdRef="ManualTrigger_10" />
+    <Assign DisplayName="Assign the path for the input folder." sap:VirtualizedContainerService.HintSize="700,175" sap2010:WorkflowViewState.IdRef="Assign_60">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[baseFolder]</OutArgument>
       </Assign.To>
@@ -272,50 +339,50 @@
         <InArgument x:TypeArguments="x:String">["C:\BestellungenFolder"]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Assign the input folder path." sap:VirtualizedContainerService.HintSize="660,175" sap2010:WorkflowViewState.IdRef="Assign_34">
+    <Assign DisplayName="Assign the path for the input folder." sap:VirtualizedContainerService.HintSize="700,175" sap2010:WorkflowViewState.IdRef="Assign_63">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[inputFolder]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[baseFolder &amp; "\Input"]</InArgument>
+        <InArgument x:TypeArguments="x:String">[baseFolder + "\Input"]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Assign the master data folder path." sap:VirtualizedContainerService.HintSize="660,175" sap2010:WorkflowViewState.IdRef="Assign_35">
+    <Assign DisplayName="Assign the path for the input folder." sap:VirtualizedContainerService.HintSize="700,175" sap2010:WorkflowViewState.IdRef="Assign_64">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[masterDataFolder]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[baseFolder &amp; "\MasterData"]</InArgument>
+        <InArgument x:TypeArguments="x:String">[baseFolder + "\MasterData"]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Assign the product master file path." sap:VirtualizedContainerService.HintSize="660,175" sap2010:WorkflowViewState.IdRef="Assign_36">
+    <Assign DisplayName="Assign the path for the input folder." sap:VirtualizedContainerService.HintSize="700,175" sap2010:WorkflowViewState.IdRef="Assign_65">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[productMasterPath]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[masterDataFolder &amp; "\Product_Master.xlsx"]</InArgument>
+        <InArgument x:TypeArguments="x:String">[masterDataFolder + "\Product_Master.xlsx"]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Assign the price list file path." sap:VirtualizedContainerService.HintSize="660,175" sap2010:WorkflowViewState.IdRef="Assign_37">
+    <Assign DisplayName="Assign the path for the input folder." sap:VirtualizedContainerService.HintSize="700,175" sap2010:WorkflowViewState.IdRef="Assign_66">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[priceListPath]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[masterDataFolder &amp; "\Price_List.xlsx"]</InArgument>
+        <InArgument x:TypeArguments="x:String">[masterDataFolder + "\Price_List.xlsx"]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Assign the inventory file path." sap:VirtualizedContainerService.HintSize="660,175" sap2010:WorkflowViewState.IdRef="Assign_38">
+    <Assign DisplayName="Assign the path for the input folder." sap:VirtualizedContainerService.HintSize="700,175" sap2010:WorkflowViewState.IdRef="Assign_67">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[inventoryPath]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[masterDataFolder &amp; "\Inventory.xlsx"]</InArgument>
+        <InArgument x:TypeArguments="x:String">[masterDataFolder + "\Inventory.xlsx"]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ReadRange AddHeaders="True" DataTable="[dtProducts]" DisplayName="Read the product master file into a data table." sap:VirtualizedContainerService.HintSize="660,227" sap2010:WorkflowViewState.IdRef="ReadRange_17" Range="A3:G1000" SheetName="Products" WorkbookPath="[productMasterPath]" />
-    <ui:ReadRange AddHeaders="True" DataTable="[dtPrices]" DisplayName="Read the price list file into a data table." sap:VirtualizedContainerService.HintSize="660,227" sap2010:WorkflowViewState.IdRef="ReadRange_18" Range="A3:H1000" SheetName="Prices" WorkbookPath="[priceListPath]" />
-    <ui:ReadRange AddHeaders="True" DataTable="[dtInventory]" DisplayName="Read the inventory file into a data table." sap:VirtualizedContainerService.HintSize="660,227" sap2010:WorkflowViewState.IdRef="ReadRange_19" Range="A3:J1000" SheetName="Inventory" WorkbookPath="[inventoryPath]" />
-    <ui:ForEachFileX DisplayName="Iterate through each file in the input folder." Folder="[inputFolder]" sap:VirtualizedContainerService.HintSize="660,2232" sap2010:WorkflowViewState.IdRef="ForEachFileX_6" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
+    <ui:ReadRange AddHeaders="True" DataTable="[dtProducts]" DisplayName="Read the Product_Master.xlsx file into dtProducts." sap:VirtualizedContainerService.HintSize="700,227" sap2010:WorkflowViewState.IdRef="ReadRange_25" Range="A3:G1000" SheetName="Products" WorkbookPath="[productMasterPath]" />
+    <ui:ReadRange AddHeaders="True" DataTable="[dtPrices]" DisplayName="Read the Price_List.xlsx file into dtPrices." sap:VirtualizedContainerService.HintSize="700,227" sap2010:WorkflowViewState.IdRef="ReadRange_26" Range="A3:H1000" SheetName="Prices" WorkbookPath="[priceListPath]" />
+    <ui:ReadRange AddHeaders="True" DataTable="[dtInventory]" DisplayName="Read the Inventory.xlsx file into dtInventory." sap:VirtualizedContainerService.HintSize="700,227" sap2010:WorkflowViewState.IdRef="ReadRange_27" Range="A3:J1000" SheetName="Inventory" WorkbookPath="[inventoryPath]" />
+    <ui:ForEachFileX DisplayName="Iterate through each file in the input folder." Folder="[inputFolder]" sap:VirtualizedContainerService.HintSize="700,4084" sap2010:WorkflowViewState.IdRef="ForEachFileX_8" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
       <ui:ForEachFileX.Body>
         <ActivityAction x:TypeArguments="si:FileInfo, x:Int32">
           <ActivityAction.Argument1>
@@ -324,96 +391,170 @@
           <ActivityAction.Argument2>
             <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
           </ActivityAction.Argument2>
-          <Sequence DisplayName="" sap:VirtualizedContainerService.HintSize="626,1945" sap2010:WorkflowViewState.IdRef="Sequence_39">
+          <Sequence DisplayName="" sap:VirtualizedContainerService.HintSize="666,3788" sap2010:WorkflowViewState.IdRef="Sequence_68">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ReadRange AddHeaders="True" DataTable="[dtOrder]" DisplayName="Read the order form from the current Excel file." sap:VirtualizedContainerService.HintSize="592,227" sap2010:WorkflowViewState.IdRef="ReadRange_20" Range="A13:D30" SheetName="Order_Form" WorkbookPath="[CurrentFile.FullName]" />
-            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtOrder]" DisplayName="Iterate through each row in the order data table." sap:VirtualizedContainerService.HintSize="592,1658" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
+            <ui:ReadRange AddHeaders="True" DataTable="[dtOrder]" DisplayName="Read the Order_Form sheet from the current order file into dtOrder." sap:VirtualizedContainerService.HintSize="632,227" sap2010:WorkflowViewState.IdRef="ReadRange_28" Range="A13:D30" SheetName="Order_Form" WorkbookPath="[CurrentFile.FullName]" />
+            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtOrder]" DisplayName="Iterate through each row in the order data table." sap:VirtualizedContainerService.HintSize="632,3501" sap2010:WorkflowViewState.IdRef="ForEachRow_7">
               <ui:ForEachRow.Body>
                 <ActivityAction x:TypeArguments="sd:DataRow">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="590,1485" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="630,3328" sap2010:WorkflowViewState.IdRef="Sequence_67">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <If Condition="[Not (String.IsNullOrEmpty(CurrentRow(&quot;Product_ID&quot;).ToString()))]" DisplayName="Check if the Product_ID in the current row is not empty." sap:VirtualizedContainerService.HintSize="556,1421" sap2010:WorkflowViewState.IdRef="If_9">
+                    <If Condition="[Not String.IsNullOrEmpty(CurrentRow(&quot;Product_ID&quot;).ToString())]" DisplayName="Check if the Product_ID in the current row is not empty." sap:VirtualizedContainerService.HintSize="596,3264" sap2010:WorkflowViewState.IdRef="If_16">
                       <If.Then>
-                        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="554,1193" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="594,3036" sap2010:WorkflowViewState.IdRef="Sequence_65">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="520,1129" sap2010:WorkflowViewState.IdRef="Sequence_35">
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                            <Assign DisplayName="Assign the trimmed Product_ID to the productId variable." sap:VirtualizedContainerService.HintSize="486,179" sap2010:WorkflowViewState.IdRef="Assign_39">
-                              <Assign.To>
-                                <OutArgument x:TypeArguments="x:String">[productCode]</OutArgument>
-                              </Assign.To>
-                              <Assign.Value>
-                                <InArgument x:TypeArguments="x:String">[CurrentRow("Product_ID").ToString().Trim()]</InArgument>
-                              </Assign.Value>
-                            </Assign>
-                            <Assign DisplayName="Select rows from the products data table that match the current product ID." sap:VirtualizedContainerService.HintSize="486,179" sap2010:WorkflowViewState.IdRef="Assign_40">
-                              <Assign.To>
-                                <OutArgument x:TypeArguments="sd:DataRow[]">[productRows]</OutArgument>
-                              </Assign.To>
-                              <Assign.Value>
-                                <InArgument x:TypeArguments="sd:DataRow[]">[dtProducts.Select("Product_ID = '" &amp; productCode &amp; "'")]</InArgument>
-                              </Assign.Value>
-                            </Assign>
-                            <If Condition="[productRows.Length = 0]" DisplayName="Check if any product rows were found." sap:VirtualizedContainerService.HintSize="486,680" sap2010:WorkflowViewState.IdRef="If_8">
-                              <If.Then>
-                                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="484,273" sap2010:WorkflowViewState.IdRef="Sequence_32">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,209" sap2010:WorkflowViewState.IdRef="Sequence_31">
-                                    <sap:WorkflowViewStateService.ViewState>
-                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                      </scg:Dictionary>
-                                    </sap:WorkflowViewStateService.ViewState>
-                                    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Display a message box indicating the product was not found." sap:VirtualizedContainerService.HintSize="416,118" sap2010:WorkflowViewState.IdRef="MessageBox_9" Text="[String.Format(&quot;Product not found: {0}&quot;, productCode)]" />
-                                  </Sequence>
-                                </Sequence>
-                              </If.Then>
-                              <If.Else>
-                                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="484,273" sap2010:WorkflowViewState.IdRef="Sequence_34">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,209" sap2010:WorkflowViewState.IdRef="Sequence_33">
-                                    <sap:WorkflowViewStateService.ViewState>
-                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                      </scg:Dictionary>
-                                    </sap:WorkflowViewStateService.ViewState>
-                                    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Display a message box indicating the product was found." sap:VirtualizedContainerService.HintSize="416,118" sap2010:WorkflowViewState.IdRef="MessageBox_10" Text="[String.Format(&quot;Product found: {0}&quot;, productCode)]" />
-                                  </Sequence>
-                                </Sequence>
-                              </If.Else>
-                            </If>
-                          </Sequence>
+                          <Assign DisplayName="Assign the Product_ID from the current row to the productId variable." sap:VirtualizedContainerService.HintSize="560,179" sap2010:WorkflowViewState.IdRef="Assign_54">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[productId]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[CurrentRow("Product_ID").ToString()]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <Assign DisplayName="Find the product in the dtProducts table." sap:VirtualizedContainerService.HintSize="560,179" sap2010:WorkflowViewState.IdRef="Assign_55">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="sd:DataRow[]">[productRows]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="sd:DataRow[]">[dtProducts.Select("Product_ID = '" &amp; productId &amp; "'")]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <If Condition="[productRows.Length = 0]" DisplayName="Check if the product was found in the master list." sap:VirtualizedContainerService.HintSize="560,2614" sap2010:WorkflowViewState.IdRef="If_15">
+                            <If.Then>
+                              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="558,234" sap2010:WorkflowViewState.IdRef="Sequence_57">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:LogMessage DisplayName="Log a message indicating the product was not found." sap:VirtualizedContainerService.HintSize="524,170" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="[String.Format(&quot;Product not found for ID: {0}&quot;, productId)]" />
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="558,2246" sap2010:WorkflowViewState.IdRef="Sequence_64">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Assign DisplayName="Find the price for the product in the dtPrices table." sap:VirtualizedContainerService.HintSize="524,179" sap2010:WorkflowViewState.IdRef="Assign_56">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="sd:DataRow[]">[priceRows]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="sd:DataRow[]">[dtPrices.Select("Product_ID = '" &amp; productId &amp; "'")]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <If Condition="[priceRows.Length = 0]" DisplayName="Check if a price was found for the product." sap:VirtualizedContainerService.HintSize="524,2003" sap2010:WorkflowViewState.IdRef="If_14">
+                                  <If.Then>
+                                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="522,234" sap2010:WorkflowViewState.IdRef="Sequence_58">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:LogMessage DisplayName="Log a message indicating the price was not found." sap:VirtualizedContainerService.HintSize="488,170" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Warn" Message="[String.Format(&quot;Price not found for product ID: {0}&quot;, productId)]" />
+                                    </Sequence>
+                                  </If.Then>
+                                  <If.Else>
+                                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="522,1635" sap2010:WorkflowViewState.IdRef="Sequence_63">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <Assign DisplayName="Assign the quantity from the order." sap:VirtualizedContainerService.HintSize="488,179" sap2010:WorkflowViewState.IdRef="Assign_57">
+                                        <Assign.To>
+                                          <OutArgument x:TypeArguments="x:Int32">[quantity]</OutArgument>
+                                        </Assign.To>
+                                        <Assign.Value>
+                                          <InArgument x:TypeArguments="x:Int32">[Convert.ToInt32(CurrentRow("Quantity"))]</InArgument>
+                                        </Assign.Value>
+                                      </Assign>
+                                      <Assign DisplayName="Find the inventory record for the product." sap:VirtualizedContainerService.HintSize="488,179" sap2010:WorkflowViewState.IdRef="Assign_58">
+                                        <Assign.To>
+                                          <OutArgument x:TypeArguments="sd:DataRow[]">[inventoryRows]</OutArgument>
+                                        </Assign.To>
+                                        <Assign.Value>
+                                          <InArgument x:TypeArguments="sd:DataRow[]">[dtInventory.Select("Product_ID = '" &amp; productId &amp; "'")]</InArgument>
+                                        </Assign.Value>
+                                      </Assign>
+                                      <If Condition="[inventoryRows.Length = 0]" DisplayName="Check if an inventory record was found." sap:VirtualizedContainerService.HintSize="488,1213" sap2010:WorkflowViewState.IdRef="If_13">
+                                        <If.Then>
+                                          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="486,234" sap2010:WorkflowViewState.IdRef="Sequence_59">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ui:LogMessage DisplayName="Log a message indicating the inventory record was not found." sap:VirtualizedContainerService.HintSize="452,170" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[String.Format(&quot;Inventory record not found for product ID: {0}&quot;, productId)]" />
+                                          </Sequence>
+                                        </If.Then>
+                                        <If.Else>
+                                          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="486,845" sap2010:WorkflowViewState.IdRef="Sequence_62">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <Assign DisplayName="Assign the available quantity from the inventory." sap:VirtualizedContainerService.HintSize="452,179" sap2010:WorkflowViewState.IdRef="Assign_59">
+                                              <Assign.To>
+                                                <OutArgument x:TypeArguments="x:Int32">[availableQty]</OutArgument>
+                                              </Assign.To>
+                                              <Assign.Value>
+                                                <InArgument x:TypeArguments="x:Int32">[Convert.ToInt32(inventoryRows(0)("Available_Qty"))]</InArgument>
+                                              </Assign.Value>
+                                            </Assign>
+                                            <If Condition="[availableQty &gt;= quantity]" DisplayName="Check if there is enough stock available." sap:VirtualizedContainerService.HintSize="452,602" sap2010:WorkflowViewState.IdRef="If_12">
+                                              <If.Then>
+                                                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,234" sap2010:WorkflowViewState.IdRef="Sequence_60">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                  <ui:LogMessage DisplayName="Log a message indicating stock is available." sap:VirtualizedContainerService.HintSize="416,170" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[String.Format(&quot;Stock available for product ID: {0}&quot;, productId)]" />
+                                                </Sequence>
+                                              </If.Then>
+                                              <If.Else>
+                                                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,234" sap2010:WorkflowViewState.IdRef="Sequence_61">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                  <ui:LogMessage DisplayName="Log a message indicating there is not enough stock." sap:VirtualizedContainerService.HintSize="416,170" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Warn" Message="[String.Format(&quot;Not enough stock for product ID: {0}. Required: {1}, Available: {2}&quot;, productId, quantity, availableQty)]" />
+                                                </Sequence>
+                                              </If.Else>
+                                            </If>
+                                          </Sequence>
+                                        </If.Else>
+                                      </If>
+                                    </Sequence>
+                                  </If.Else>
+                                </If>
+                              </Sequence>
+                            </If.Else>
+                          </If>
                         </Sequence>
                       </If.Then>
                       <If.Else>
-                        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="554,94" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="594,94" sap2010:WorkflowViewState.IdRef="Sequence_66">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -430,5 +571,21 @@
         </ActivityAction>
       </ui:ForEachFileX.Body>
     </ui:ForEachFileX>
+    <Assign DisplayName="Assign the path for the input folder." sap:VirtualizedContainerService.HintSize="700,175" sap2010:WorkflowViewState.IdRef="Assign_61">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[inputFolder]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[Path.Combine(baseFolder, "Input")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Assign the path for the input folder." sap:VirtualizedContainerService.HintSize="700,175" sap2010:WorkflowViewState.IdRef="Assign_62">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[baseFolder]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">["C:\BestellungenFolder"]</InArgument>
+      </Assign.Value>
+    </Assign>
   </Sequence>
 </Activity>
