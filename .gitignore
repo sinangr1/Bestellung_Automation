@@ -1,0 +1,11 @@
+# UiPath local build artifacts
+.local/
+.settings/
+*.nupkg
+
+# Temporary files
+~*.json
+*.tmp
+
+# DLL files
+*.dll
